@@ -82,12 +82,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── CUSTOM WEBSITE GUIDE ──
-with st.expander("📖 How to add a custom website — read this first"):
+with st.expander(" How to add a custom website — read this first"):
     st.markdown("""
 **The golden rule:** You can only scrape sites that show data **without requiring login.**
 
 ---
-### ✅ Websites you CAN scrape
+###  Websites you CAN scrape
 
 | Type | Examples | What you extract |
 |---|---|---|
@@ -97,13 +97,13 @@ with st.expander("📖 How to add a custom website — read this first"):
 | Open directories | Crunchbase public, Product Hunt | Company names, descriptions |
 | Government data | data.gov.in | Open datasets |
 
-### ❌ Websites you CANNOT scrape
+###  Websites you CANNOT scrape
 - Sites requiring **login** (LinkedIn, Amazon account pages)
 - Sites with **Cloudflare bot protection** (most large e-commerce block scrapers)
 - Instagram, Twitter, Facebook — they actively block scrapers
 
 ---
-### 🔧 How to find CSS selectors for a custom site
+###  How to find CSS selectors for a custom site
 
 1. Open the site in **Chrome**
 2. Right-click on a product name → click **Inspect**
@@ -189,9 +189,9 @@ def get_insights(df_a, df_b, la, lb):
     ins, sa, sb = [], 0, 0
     avg_a,avg_b = df_a["Price"].mean(), df_b["Price"].mean()
     if avg_a < avg_b:
-        sa+=1; ins.append(("good",f"💰 **{la}** is cheaper — {avg_a:.2f} vs {avg_b:.2f}"))
+        sa+=1; ins.append(("good",f"⭐ **{la}** is cheaper — {avg_a:.2f} vs {avg_b:.2f}"))
     elif avg_b < avg_a:
-        sb+=1; ins.append(("good",f"💰 **{lb}** is cheaper — {avg_b:.2f} vs {avg_a:.2f}"))
+        sb+=1; ins.append(("good",f"⭐ **{lb}** is cheaper — {avg_b:.2f} vs {avg_a:.2f}"))
     ra,rb = df_a["Rating"].mean(), df_b["Rating"].mean()
     if ra > rb:
         sa+=1; ins.append(("info",f"⭐ **{la}** is rated higher — {ra:.2f}/5 vs {rb:.2f}/5"))
@@ -203,9 +203,9 @@ def get_insights(df_a, df_b, la, lb):
     elif av_b > av_a:
         sb+=1; ins.append(("good",f"✅ **{lb}** has better availability — {av_b:.0f}% vs {av_a:.0f}%"))
     if len(df_a) > len(df_b):
-        ins.append(("info",f"📦 **{la}** has larger catalogue — {len(df_a)} vs {len(df_b)}"))
+        ins.append(("info",f"⭐ **{la}** has larger catalogue — {len(df_a)} vs {len(df_b)}"))
     elif len(df_b) > len(df_a):
-        ins.append(("info",f"📦 **{lb}** has larger catalogue — {len(df_b)} vs {len(df_a)}"))
+        ins.append(("info",f"⭐ **{lb}** has larger catalogue — {len(df_b)} vs {len(df_a)}"))
     if df_a["Price"].std() > df_b["Price"].std()*1.4:
         ins.append(("warn",f"⚠️ **{la}** has inconsistent pricing — consider standardising price tiers"))
     elif df_b["Price"].std() > df_a["Price"].std()*1.4:
@@ -227,12 +227,12 @@ def to_excel(df_a, df_b, la, lb):
     return buf.getvalue()
 
 # ── SIDEBAR ──
-SITES = {"📚 Books Store (books.toscrape.com)":"books",
-         "💬 Quotes Platform (quotes.toscrape.com)":"quotes",
-         "🔧 Custom URL":"custom"}
+SITES = {" Books Store (books.toscrape.com)":"books",
+         " Quotes Platform (quotes.toscrape.com)":"quotes",
+         " Custom URL":"custom"}
 
 with st.sidebar:
-    st.markdown("### ⚙️ Competitor A")
+    st.markdown("###  Competitor A")
     site_a  = st.selectbox("Source A", list(SITES.keys()), key="sa")
     label_a = st.text_input("Label A", "Competitor A", key="la")
     pages_a = st.slider("Pages A", 1, 5, 2, key="pa")
@@ -245,7 +245,7 @@ with st.sidebar:
         price_a = st.text_input("Price selector (optional)", placeholder="span.price", key="pra")
 
     st.markdown("---")
-    st.markdown("### ⚙️ Competitor B")
+    st.markdown("### Competitor B")
     site_b  = st.selectbox("Source B", list(SITES.keys()), index=1, key="sb")
     label_b = st.text_input("Label B", "Competitor B", key="lb")
     pages_b = st.slider("Pages B", 1, 5, 2, key="pb")
